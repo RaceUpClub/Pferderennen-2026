@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pferderenn-Kalender 2026</title>
+    <title>Pferderennen 2026</title>
     <style>
         :root {
             --color-white: rgba(255, 255, 255, 1);
@@ -159,7 +159,7 @@
         }
 
         /* Country Colors */
-        .race-bar.de { background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%); border-left-color: #1e40af; }
+        .race-bar.de { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); border-left-color: #15803d; }
         .race-bar.usa { background: linear-gradient(135deg, #ef4444 0%, #7f1d1d 100%); border-left-color: #7f1d1d; }
         .race-bar.uk { background: linear-gradient(135deg, #8b5cf6 0%, #4c1d95 100%); border-left-color: #4c1d95; }
         .race-bar.fr { background: linear-gradient(135deg, #ec4899 0%, #831843 100%); border-left-color: #831843; }
@@ -265,31 +265,6 @@
         .close-btn:hover {
             color: var(--color-slate-900);
             background: none;
-        }
-
-        .legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--space-12);
-            margin-bottom: var(--space-24);
-            padding: var(--space-16);
-            background: var(--color-white);
-            border-radius: var(--radius-base);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-8);
-            font-size: 13px;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
-            flex-shrink: 0;
         }
 
         .stats {
@@ -477,8 +452,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>🏇 Pferderenn-Kalender 2026</h1>
-            <p class="subtitle">Interaktive Timeline der wichtigsten Rennveranstaltungen weltweit</p>
+            <h1>🏇 Pferderennen 2026</h1>
+            <p class="subtitle">Der internationale Rennkalender für Deutschland & die Welt</p>
         </header>
 
         <div class="stats" id="stats"></div>
@@ -517,8 +492,6 @@
         </div>
 
         <div class="info-message" id="infoMessage" style="display: none;"></div>
-
-        <div class="legend" id="legendContainer"></div>
 
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('timeline')">📅 Timeline View</button>
@@ -606,7 +579,7 @@
         ];
 
         const countryMap = { "DE": "de", "USA": "usa", "UK": "uk", "FR": "fr", "IRE": "ire", "KSA": "ksa", "UAE": "uae", "HK": "hk", "AUS": "aus", "JPN": "jpn" };
-        const countryColors = { de: "#3b82f6", usa: "#ef4444", uk: "#8b5cf6", fr: "#ec4899", ire: "#10b981", ksa: "#f59e0b", uae: "#06b6d4", hk: "#a855f7", aus: "#f97316", jpn: "#e11d48" };
+        const countryColors = { de: "#22c55e", usa: "#ef4444", uk: "#8b5cf6", fr: "#ec4899", ire: "#10b981", ksa: "#f59e0b", uae: "#06b6d4", hk: "#a855f7", aus: "#f97316", jpn: "#e11d48" };
 
         let filteredRaces = [...races];
 
@@ -675,7 +648,6 @@
             const grid = document.getElementById("calendarGrid");
             grid.innerHTML = "";
 
-            // Wochentag-Header
             const weekDays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
             weekDays.forEach(day => {
                 const header = document.createElement("div");
@@ -684,7 +656,6 @@
                 grid.appendChild(header);
             });
 
-            // Tage aus vorherigem Monat
             const startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
             for (let i = startDay; i > 0; i--) {
                 const dayDiv = document.createElement("div");
@@ -693,7 +664,6 @@
                 grid.appendChild(dayDiv);
             }
 
-            // Tage des aktuellen Monats
             for (let day = 1; day <= lastDay.getDate(); day++) {
                 const dateStr = `${String(day).padStart(2, "0")}.${String(month + 1).padStart(2, "0")}.${year}`;
                 const dayRaces = filteredRaces.filter(r => r.date === dateStr);
@@ -710,7 +680,6 @@
                 grid.appendChild(dayDiv);
             }
 
-            // Tage aus nächstem Monat
             for (let day = 1; day <= nextDays; day++) {
                 const dayDiv = document.createElement("div");
                 dayDiv.className = "calendar-day other-month";
@@ -878,7 +847,6 @@
             if (event.target === modal) closeModal();
         };
 
-        // Initial render
         renderTimeline();
         renderCalendar();
     </script>
